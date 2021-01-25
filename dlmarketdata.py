@@ -13,7 +13,7 @@ from dateutil.parser import parse
 import numpy as np
 import pandas as pd
 
-from ibapi import wrapper
+from ibapi import wrapper 
 from ibapi.common import TickerId, BarData
 from ibapi.client import EClient
 from ibapi.contract import Contract
@@ -53,7 +53,7 @@ class DownloadApp(EClient, wrapper.EWrapper):
         self.args = args
         self.current = self.args.end_date
         self.duration = self.args.duration
-        self.useRTH = 0
+        self.useRTH = 1
 
     def next_request_id(self, contract: Contract) -> int:
         self.request_id += 1
