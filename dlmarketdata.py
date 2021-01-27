@@ -273,6 +273,9 @@ def main():
         "-d", "--debug", action="store_true", help="turn on debug logging"
     )
     argp.add_argument(
+        "--host", type=str, default="127.0.0.1", help="host adress to connect to",
+    )
+    argp.add_argument(
         "-p", "--port", type=int, default=7496, help="local port for TWS connection"
     )
     argp.add_argument("--size", type=str, default="1 min", help="bar size")
@@ -307,6 +310,9 @@ def main():
     argp.add_argument(
         "--max-days", help="Set start date to earliest date", action="store_true",
     )
+    argp.add_argument(
+        "--contract-date", help="futures contract date", type=str,
+    )
     args = argp.parse_args()
 
     if args.debug:
@@ -330,7 +336,7 @@ def main():
         contracts.append(contract)
         os.makedirs(make_download_path(args, contract), exist_ok=True)
     app = DownloadApp(contracts, args)
-    app.connect("127.0.0.1", args.port, clientId=0)
+    app.connect(args.host, args.port, clientId=0)
 
     app.run()
 
